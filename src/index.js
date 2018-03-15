@@ -2,6 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+function Reset(props){
+  return (
+    <button onClick = {props.reset}>
+      Play Again
+    </button>
+  );
+}
+
 function Square(props) {
   return (
     <button className="square" onClick= {props.onClick}>
@@ -38,6 +46,9 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <div>
+          <Reset reset={this.props.reset}/>
+        </div>
       </div>
     );
   }
@@ -70,6 +81,17 @@ class Game extends React.Component {
     });
   }
 
+  handleReset(){
+    // const newGame = Array(9).fill(null);
+    console.log(this);
+    this.setState({
+      history: [{
+        squares: Array(9).fill(null)
+      }],
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
 
   render() {
     const history = this.state.history;
@@ -89,6 +111,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(index)=> this.handleClick(index)}
+            reset={()=> this.handleReset()}
           />
         </div>
         <div className="game-info">

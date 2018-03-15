@@ -82,13 +82,10 @@ class Game extends React.Component {
   }
 
   handleReset(){
-    // const newGame = Array(9).fill(null);
-    console.log(this);
     this.setState({
       history: [{
         squares: Array(9).fill(null)
-      }],
-      xIsNext: !this.state.xIsNext,
+      }]
     });
   }
 
